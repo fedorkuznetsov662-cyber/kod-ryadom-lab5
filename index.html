@@ -101,7 +101,8 @@
     .direction-card{background:#fff;border:1px solid #d6dff4;border-radius:var(--radius);padding:27px 26px;display:flex;flex-direction:column;min-width:0}
     .card-meta{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
     .card-meta .card-no{color:var(--blue);font-family:Consolas,monospace;font-size:12px}
-    .direction-symbol{color:var(--blue);font:45px/1.15 Consolas,monospace;letter-spacing:-.08em;margin:40px 0 26px}
+    .direction-image-frame{width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:12px;flex:none;margin:26px 0 22px}
+    .direction-image{display:block;width:100%;height:100%;object-fit:cover}
     .direction-card h3{font-size:28px;letter-spacing:-.04em;margin-bottom:14px}
     .direction-card>p{font-size:15px;color:var(--muted);min-height:97px}
     .project-example{margin:25px 0 22px;padding-top:19px;border-top:1px solid #e1e6ee;font-size:14px;line-height:1.6}
@@ -144,11 +145,12 @@
     .footer-name{color:var(--ink);font-weight:700;font-size:15px;letter-spacing:-.03em}
     .footer-inner a:hover{color:var(--blue)}
     @media(min-width:1500px){.hero{padding-top:85px}.hero-grid{padding-bottom:65px}}
+    @media(min-width:761px) and (max-width:1020px){.direction-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.direction-card>p{min-height:0}}
     @media(max-width:1020px){
       .container{width:calc(100% - 48px)}.site-nav{gap:18px}.hero-grid{gap:30px}.hero h1{font-size:clamp(48px,6.45vw,67px)}.hero-art{padding:27px 20px 24px;min-height:410px}.code-lines{padding:20px 13px;font-size:12px}.code-result{margin-left:25px;padding:15px;font-size:12px}.section{padding:78px 0}.benefits{padding-top:0}.about-layout{gap:45px;grid-template-columns:1fr 1.7fr}.section-top{gap:35px}.section-top .eyebrow{min-width:160px}.benefits-layout{gap:35px;grid-template-columns:1fr 2.6fr}.benefit-list{gap:20px}.direction-card{padding:23px 20px}.direction-card h3{font-size:25px}.direction-card>p{min-height:120px}.faq-layout{gap:50px}.next-panel{padding:40px;gap:40px}.next-panel h2{font-size:38px}
     }
     @media(max-width:760px){
-      html{scroll-padding-top:24px}.container{width:calc(100% - 40px)}.header-inner{min-height:0;display:block;padding:19px 0 16px}.logo{font-size:23px}.site-nav{margin-top:15px;gap:4px 20px;flex-wrap:wrap;font-size:13px}.site-nav a{padding:5px 0}.hero{padding-top:42px}.hero-grid{grid-template-columns:1fr;gap:36px;padding-bottom:36px}.hero h1{font-size:clamp(53px,11.3vw,78px);max-width:620px;margin:22px 0}.hero-description{font-size:17px;max-width:530px}.hero-art{min-height:0;max-width:510px;width:100%;padding:28px 28px 25px}.code-window{margin-top:23px;max-width:420px}.code-lines{font-size:14px;padding:22px}.code-result{margin-left:80px;max-width:340px;font-size:14px}.cursor-label{margin-top:18px}.hero-strip{padding:18px 0;gap:16px}.strip-item{padding:0;gap:9px;border:0;font-size:11px;line-height:1.5}.strip-number{font-size:10px}.section{padding:64px 0}.section-top{display:block;margin-bottom:28px}.section-top .eyebrow{padding:0;margin-bottom:21px}.section-top h2{font-size:43px}.about-layout{grid-template-columns:1fr;gap:25px}.about-tag{margin:0}.about-copy{font-size:20px}.benefits{padding-top:0}.benefits-layout{display:block;padding-top:28px}.benefits h2{max-width:none;font-size:29px;margin-bottom:30px}.benefit-list{gap:25px}.benefit-list h3{font-size:17px}.benefit-list p{font-size:13px}.directions-heading,.route-intro{display:block;margin-top:21px}.directions-heading h2,.route-intro h2{font-size:43px}.directions-heading p,.route-intro p{max-width:500px;margin-top:20px}.direction-grid{gap:14px;grid-template-columns:1fr}.direction-card{padding:25px;display:grid;grid-template-columns:1fr 1.4fr;gap:0 25px}.card-meta{grid-column:1/-1}.direction-symbol{margin:25px 0 17px;grid-column:1}.direction-card h3{grid-column:1;font-size:28px;margin-bottom:18px}.direction-card>p{grid-column:2;grid-row:2/4;align-self:center;min-height:0}.project-example{grid-column:1/-1;margin:6px 0 20px;padding-top:15px}.direction-card .text-link{grid-column:1/-1}.route-list{grid-template-columns:repeat(2,1fr);gap:30px 24px;border:0}.route-list li{border-top:1px solid var(--line);padding-top:24px;padding-right:0}.meeting-number{margin-bottom:22px}.route-list p,.route-list h3{max-width:none}.faq-layout{grid-template-columns:1fr;gap:30px}.faq-intro h2{font-size:43px;margin:21px 0 15px}.faq-intro p{max-width:500px}.next-panel{grid-template-columns:1fr;padding:32px;gap:30px}.next-panel h2{font-size:41px;max-width:500px}.next-panel .next-description{max-width:500px}.next-step{padding-bottom:50px}.footer-inner{align-items:flex-start;flex-wrap:wrap;gap:13px 25px}.footer-inner>p{flex-basis:100%;order:3}
+      html{scroll-padding-top:24px}.container{width:calc(100% - 40px)}.header-inner{min-height:0;display:block;padding:19px 0 16px}.logo{font-size:23px}.site-nav{margin-top:15px;gap:4px 20px;flex-wrap:wrap;font-size:13px}.site-nav a{padding:5px 0}.hero{padding-top:42px}.hero-grid{grid-template-columns:1fr;gap:36px;padding-bottom:36px}.hero h1{font-size:clamp(53px,11.3vw,78px);max-width:620px;margin:22px 0}.hero-description{font-size:17px;max-width:530px}.hero-art{min-height:0;max-width:510px;width:100%;padding:28px 28px 25px}.code-window{margin-top:23px;max-width:420px}.code-lines{font-size:14px;padding:22px}.code-result{margin-left:80px;max-width:340px;font-size:14px}.cursor-label{margin-top:18px}.hero-strip{padding:18px 0;gap:16px}.strip-item{padding:0;gap:9px;border:0;font-size:11px;line-height:1.5}.strip-number{font-size:10px}.section{padding:64px 0}.section-top{display:block;margin-bottom:28px}.section-top .eyebrow{padding:0;margin-bottom:21px}.section-top h2{font-size:43px}.about-layout{grid-template-columns:1fr;gap:25px}.about-tag{margin:0}.about-copy{font-size:20px}.benefits{padding-top:0}.benefits-layout{display:block;padding-top:28px}.benefits h2{max-width:none;font-size:29px;margin-bottom:30px}.benefit-list{gap:25px}.benefit-list h3{font-size:17px}.benefit-list p{font-size:13px}.directions-heading,.route-intro{display:block;margin-top:21px}.directions-heading h2,.route-intro h2{font-size:43px}.directions-heading p,.route-intro p{max-width:500px;margin-top:20px}.direction-grid{gap:14px;grid-template-columns:1fr}.direction-card{padding:25px;display:grid;grid-template-columns:1fr;gap:0}.card-meta{grid-column:1/-1}.direction-image-frame{grid-column:1/-1;margin:24px 0 20px}.direction-card h3{grid-column:1/-1;font-size:28px;margin-bottom:18px}.direction-card>p{grid-column:1/-1;grid-row:auto;align-self:auto;min-height:0}.project-example{grid-column:1/-1;margin:6px 0 20px;padding-top:15px}.direction-card .text-link{grid-column:1/-1}.route-list{grid-template-columns:repeat(2,1fr);gap:30px 24px;border:0}.route-list li{border-top:1px solid var(--line);padding-top:24px;padding-right:0}.meeting-number{margin-bottom:22px}.route-list p,.route-list h3{max-width:none}.faq-layout{grid-template-columns:1fr;gap:30px}.faq-intro h2{font-size:43px;margin:21px 0 15px}.faq-intro p{max-width:500px}.next-panel{grid-template-columns:1fr;padding:32px;gap:30px}.next-panel h2{font-size:41px;max-width:500px}.next-panel .next-description{max-width:500px}.next-step{padding-bottom:50px}.footer-inner{align-items:flex-start;flex-wrap:wrap;gap:13px 25px}.footer-inner>p{flex-basis:100%;order:3}
     }
     @media(max-width:420px){
       .container{width:calc(100% - 32px)}.hero h1{font-size:53px}.eyebrow{font-size:10px}.hero-actions{gap:12px}.button{gap:18px;padding:13px 17px}.text-link{font-size:13px}.hero-art{padding:23px 18px}.art-caption{font-size:9px}.code-lines{font-size:12px;padding:19px 11px}.code-lines .number{width:23px}.code-result{margin-left:34px;font-size:12px;gap:10px;padding:14px}.hero-strip{grid-template-columns:1fr;gap:12px}.strip-item{font-size:12px;gap:12px}.benefit-list{grid-template-columns:1fr;gap:28px}.benefit-list li{display:grid;grid-template-columns:38px 1fr;column-gap:18px}.benefit-icon{grid-row:1/3;margin-bottom:0}.benefit-list h3{font-size:19px;margin-bottom:8px}.benefit-list p{font-size:14px}.direction-card{display:flex;padding:25px}.direction-symbol{margin:28px 0 20px}.direction-card>p{margin-bottom:15px}.direction-card h3{margin-bottom:14px}.project-example{width:100%;margin-top:8px}.route-list{grid-template-columns:1fr;gap:28px}.meeting-number{margin-bottom:14px}.route-list h3{font-size:24px}.route-list p{max-width:330px}.meeting-result{margin-top:14px}.next-panel{padding:29px 24px}.next-panel h2{font-size:37px}.section-top h2,.directions-heading h2,.route-intro h2,.faq-intro h2{font-size:38px}
@@ -261,7 +263,7 @@
         <div class="direction-grid" id="direction-grid">
           <article class="direction-card" data-direction="python">
             <div class="card-meta"><span class="card-no">/ 01</span><span>Начни с простого</span></div>
-            <div class="direction-symbol" aria-hidden="true">print()</div>
+            <div class="direction-image-frame"><img class="direction-image" src="images/304e44c3-d8e7-4956-b05a-8371672b05ae.png" alt="Ноутбук с редактором кода, где записана функция для вычисления чисел Фибоначчи на Python" loading="lazy" width="1536" height="1024"></div>
             <h3>Python</h3>
             <p>Переменные, условия и циклы на понятных задачах. Учимся превращать последовательность действий в работающую программу.</p>
             <div class="project-example"><span>Первый мини-проект</span>Консольный список дел: добавить задачу, показать список, отметить готовое.</div>
@@ -269,7 +271,7 @@
           </article>
           <article class="direction-card" data-direction="web">
             <div class="card-meta"><span class="card-no">/ 02</span><span>Увидь результат</span></div>
-            <div class="direction-symbol" aria-hidden="true">&lt;/&gt;</div>
+            <div class="direction-image-frame"><img class="direction-image" src="images/изобр%201.png" alt="Разработка веб-страницы на ноутбуке рядом с эскизами интерфейса" loading="lazy" width="1536" height="1024"></div>
             <h3>Веб-разработка</h3>
             <p>HTML задаёт структуру, CSS — оформление, а JavaScript добавляет действия. Собираем страницу, удобную на телефоне и компьютере.</p>
             <div class="project-example"><span>Первый мини-проект</span>Страница о любимом увлечении с карточками и раскрывающимися ответами.</div>
@@ -277,14 +279,14 @@
           </article>
           <article class="direction-card" data-direction="algorithms">
             <div class="card-meta"><span class="card-no">/ 03</span><span>Разложи по шагам</span></div>
-            <div class="direction-symbol" aria-hidden="true">[1,2,3]</div>
+            <div class="direction-image-frame"><img class="direction-image" src="images/изобр%202.png" alt="Рука рисует схему алгоритма в блокноте, соединяя шаги стрелками" loading="lazy" width="1536" height="1024"></div>
             <h3>Алгоритмы</h3>
             <p>Разбираем задачу на части, сравниваем способы поиска и проверяем решения на примерах. Начинаем со схем и простого кода.</p>
             <div class="project-example"><span>Первый мини-проект</span>Игра «Угадай число» со счётчиком попыток и обсуждением стратегии поиска.</div>
             <a class="text-link" href="#route">Посмотреть маршрут <span aria-hidden="true">↗</span></a>
           </article>
         </div>
-        <p class="directions-footnote">Это примеры учебных направлений и проектов, а не расписание действующих занятий.</p>
+        <p class="directions-footnote">Это примеры учебных направлений и проектов, а не расписание действующих занятий. Иллюстрации созданы с помощью ИИ для учебного проекта.</p>
       </div>
     </section>
 
