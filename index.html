@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Код рядом — учебный лендинг вымышленного студенческого клуба. Знакомимся с Python, веб-разработкой и алгоритмами через совместную практику.">
+  <meta name="theme-color" content="#1749ed">
+  <title>Код рядом — начинаем вместе</title>
+  <style>
+    :root{--paper:#f6f7f3;--ink:#15202c;--muted:#586674;--blue:#1749ed;--pale:#e7edff;--line:#d6dddF;--white:#fff;--radius:20px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:100px}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    button,input,summary{font:inherit}
+    a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:5px}
+    [hidden]{display:none!important}
+    ::selection{background:#cad7ff}
+    h1,h2,h3,p{margin:0}
+    h1,h2,h3{line-height:1.08;letter-spacing:-.045em}
+    h2{font-size:clamp(35px,4.6vw,61px);font-weight:700}
+    h3{font-size:25px}
+    ul,ol{margin:0;padding:0;list-style:none}
+    svg{display:block;max-width:100%}
+    .container{width:min(1180px,calc(100% - 80px));margin-inline:auto}
+    .skip-link{position:fixed;z-index:100;top:12px;left:12px;padding:10px 20px;background:var(--blue);color:white;transform:translateY(-160%)}
+    .skip-link:focus{transform:none}
+    .site-header{border-bottom:1px solid var(--line);background:var(--paper)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:95px}
+    .logo{display:inline-flex;align-items:center;gap:11px;white-space:nowrap;font-size:24px;font-weight:800;letter-spacing:-.045em}
+    .logo-symbol{display:grid;place-items:center;width:37px;height:37px;background:var(--blue);border-radius:10px;color:white;font-family:monospace;font-size:20px;letter-spacing:-.12em;padding-right:3px}
+    .site-nav{display:flex;gap:28px;align-items:center;font-size:14px;font-weight:600}
+    .site-nav a{padding:10px 0;transition:color .2s}
+    .site-nav a:hover{color:var(--blue)}
+    .site-nav .nav-next{border-bottom:1px solid var(--blue);color:var(--blue)}
+    .menu-toggle{display:none;align-items:center;justify-content:center;gap:9px;min-width:100px;min-height:44px;padding:9px 13px;border:1px solid var(--line);border-radius:8px;background:transparent;color:var(--ink);font-size:14px;font-weight:700;cursor:pointer}
+    .menu-toggle:hover{border-color:var(--blue);color:var(--blue)}
+    .menu-icon{display:inline-block;width:18px;font-size:20px;line-height:1;text-align:center}
+    .menu-icon::before{content:"☰"}
+    .menu-toggle[aria-expanded="true"] .menu-icon::before{content:"×"}
+    .eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+    .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0}
+    .hero{padding:70px 0 0}
+    .hero-grid{display:grid;grid-template-columns:1.12fr 1fr;align-items:center;gap:52px;padding-bottom:56px}
+    .hero h1{font-size:clamp(54px,6.45vw,86px);line-height:.99;margin:26px 0 26px;max-width:670px}
+    .hero h1 span{color:var(--blue)}
+    .hero-description{max-width:460px;font-size:18px;color:var(--muted)}
+    .hero-actions{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:30px}
+    .button{display:inline-flex;align-items:center;justify-content:center;gap:24px;min-height:53px;padding:14px 23px;border-radius:8px;background:var(--blue);color:white;font-size:14px;font-weight:700;transition:background .2s,transform .2s}
+    .button:hover{background:#1038bc;transform:translateY(-2px)}
+    .arrow{font-size:21px;line-height:1}
+    .text-link{display:inline-flex;align-items:center;gap:12px;font-size:14px;font-weight:700;border-bottom:1px solid var(--line);padding:8px 0}
+    .text-link:hover{color:var(--blue);border-color:var(--blue)}
+    .hero-note{margin-top:22px;font-size:12px;color:var(--muted)}
+    .hero-art{position:relative;min-height:426px;background:#e4eaff;border-radius:28px;padding:40px 28px 28px;overflow:hidden}
+    .art-grid{position:absolute;inset:0;background-image:linear-gradient(#ccd6f480 1px,transparent 1px),linear-gradient(90deg,#ccd6f480 1px,transparent 1px);background-size:28px 28px;mask-image:linear-gradient(to bottom,#000,transparent)}
+    .art-caption{position:relative;display:flex;justify-content:space-between;gap:10px;font-size:10px;letter-spacing:.11em;font-weight:700;color:#4b63a0}
+    .code-window{position:relative;z-index:1;margin-top:28px;background:#fff;border:1px solid #becbf7;border-radius:13px;box-shadow:9px 11px 0 #c7d4ff;transform:rotate(-3deg)}
+    .window-top{display:flex;align-items:center;gap:5px;padding:14px;border-bottom:1px solid #e0e6f5;font:11px monospace;color:#5e6c82}
+    .window-top i{display:block;width:7px;height:7px;background:#c2ccef;border-radius:50%}
+    .window-top span{margin-left:12px}
+    .code-lines{padding:22px 21px 27px;font:14px/1.9 Consolas,"Courier New",monospace;white-space:nowrap}
+    .code-lines .number{color:#78849a;display:inline-block;width:27px;user-select:none}
+    .code-lines .comment{color:#6a778a}
+    .code-lines .keyword{color:#1749ed}
+    .code-lines .string{color:#287658}
+    .code-result{position:relative;z-index:2;display:flex;align-items:center;gap:13px;background:var(--blue);color:#fff;border-radius:10px;margin:25px 0 0 59px;padding:17px 18px;transform:rotate(3deg);font-size:14px;box-shadow:4px 5px 0 #cad5f8}
+    .result-check{display:grid;place-items:center;width:26px;height:26px;border:1px solid #a8bfff;border-radius:50%;font-size:15px;flex-shrink:0}
+    .cursor-label{position:relative;z-index:3;display:flex;align-items:center;justify-content:flex-end;gap:7px;color:#1749ed;margin:20px 5px 0;font-size:11px;font-weight:700}
+    .hero-strip{display:grid;grid-template-columns:1fr 1fr 1fr;padding:23px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .strip-item{display:flex;align-items:center;gap:14px;padding:0 24px;border-right:1px solid var(--line);font-size:13px;color:var(--muted)}
+    .strip-item:first-child{padding-left:0}.strip-item:last-child{border:0}
+    .strip-number{color:var(--blue);font-family:Consolas,monospace;font-size:12px}
+    .section{padding:100px 0}
+    .section-top{display:flex;align-items:flex-start;justify-content:space-between;gap:60px;margin-bottom:42px}
+    .section-top .eyebrow{color:var(--muted);padding-top:10px;flex-shrink:0;min-width:190px}
+    .section-top h2{max-width:770px;flex:1}
+    .about-layout{display:grid;grid-template-columns:1fr 1.46fr;gap:78px;align-items:start}
+    .about-tag{display:inline-flex;align-items:center;gap:10px;color:var(--blue);font:13px Consolas,monospace;padding:12px 15px;border:1px solid #bdcbfc;border-radius:30px;margin-top:7px}
+    .about-copy{font-size:21px;line-height:1.65;max-width:700px}
+    .about-copy p+p{margin-top:19px;font-size:16px;color:var(--muted)}
+    .benefits{padding-top:0}
+    .benefits-layout{border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 2.2fr;gap:60px;padding-top:33px}
+    .benefits h2{font-size:29px;max-width:210px;line-height:1.18}
+    .benefit-list{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+    .benefit-icon{width:38px;height:38px;display:grid;place-items:center;border:1px solid #bdcbfc;color:var(--blue);border-radius:50%;font-family:Consolas,monospace;margin-bottom:19px;font-size:18px}
+    .benefit-list h3{font-size:19px;letter-spacing:-.025em;margin-bottom:12px;line-height:1.2}
+    .benefit-list p{font-size:14px;color:var(--muted);line-height:1.7}
+    .directions{background:#e9eefb;border-block:1px solid #d9e1f4}
+    .directions-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin:22px 0 36px}
+    .directions-heading p{max-width:335px;color:var(--muted);font-size:15px}
+    .direction-filter{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:10px}
+    .filter-caption{font-size:13px;color:var(--muted);margin-right:4px}
+    .filter-button{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:9px 16px;border:1px solid #bdcbef;border-radius:24px;background:#fff;color:var(--ink);font-size:13px;font-weight:700;cursor:pointer}
+    .filter-button::before{content:"";display:inline-block;width:12px}
+    .filter-button:hover{border-color:var(--blue)}
+    .filter-button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+    .filter-button[aria-pressed="true"]::before{content:"✓"}
+    .filter-status{font-size:13px;color:var(--muted);margin-bottom:24px}
+    .direction-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .direction-card{background:#fff;border:1px solid #d6dff4;border-radius:var(--radius);padding:27px 26px;display:flex;flex-direction:column;min-width:0}
+    .card-meta{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+    .card-meta .card-no{color:var(--blue);font-family:Consolas,monospace;font-size:12px}
+    .direction-symbol{color:var(--blue);font:45px/1.15 Consolas,monospace;letter-spacing:-.08em;margin:40px 0 26px}
+    .direction-card h3{font-size:28px;letter-spacing:-.04em;margin-bottom:14px}
+    .direction-card>p{font-size:15px;color:var(--muted);min-height:97px}
+    .project-example{margin:25px 0 22px;padding-top:19px;border-top:1px solid #e1e6ee;font-size:14px;line-height:1.6}
+    .project-example span{display:block;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+    .direction-card .text-link{margin-top:auto;align-self:flex-start;color:var(--blue);border:0;padding:0}
+    .directions-footnote{font-size:12px;color:var(--muted);margin-top:25px}
+    .route-intro{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin:23px 0 45px}
+    .route-intro p{max-width:320px;color:var(--muted);font-size:15px}
+    .route-list{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);counter-reset:meeting}
+    .route-list li{position:relative;padding:30px 25px 0 0;counter-increment:meeting}
+    .route-list li:before{content:"";position:absolute;top:-5px;left:0;width:9px;height:9px;background:var(--blue);border-radius:50%}
+    .meeting-number{display:block;font:12px Consolas,monospace;color:var(--blue);margin-bottom:30px}
+    .route-list h3{font-size:23px;max-width:200px;margin-bottom:14px;line-height:1.15}
+    .route-list p{color:var(--muted);font-size:14px;max-width:220px}
+    .meeting-result{display:inline-block;margin-top:20px;font-size:11px;border:1px solid var(--line);border-radius:20px;padding:5px 10px;color:#43505f}
+    .faq-section{border-top:1px solid var(--line)}
+    .faq-layout{display:grid;grid-template-columns:1fr 1.6fr;gap:85px}
+    .faq-intro h2{margin:23px 0;font-size:48px}
+    .faq-intro p{font-size:15px;color:var(--muted);max-width:275px}
+    .faq-list{border-top:1px solid var(--line)}
+    details{border-bottom:1px solid var(--line)}
+    summary{position:relative;list-style:none;padding:22px 35px 22px 0;cursor:pointer;font-size:17px;line-height:1.45;font-weight:700;letter-spacing:-.02em}
+    summary::-webkit-details-marker{display:none}
+    summary::after{content:"+";position:absolute;right:4px;top:20px;font-size:25px;line-height:1;color:var(--blue);font-weight:400}
+    details[open] summary::after{content:"−"}
+    details p{color:var(--muted);font-size:15px;padding:0 35px 22px 0;line-height:1.7}
+    .next-step{padding:0 0 80px}
+    .next-panel{display:grid;grid-template-columns:1.08fr 1fr;gap:60px;padding:50px 52px;background:var(--blue);border-radius:24px;color:#fff}
+    .next-panel .eyebrow{color:#cdd8ff}
+    .next-panel h2{font-size:44px;margin:22px 0 18px;max-width:400px}
+    .next-panel .next-description{color:#dce4ff;font-size:15px;max-width:395px}
+    .preparation{border-top:1px solid #7896ff}
+    .preparation li{display:flex;align-items:flex-start;gap:13px;border-bottom:1px solid #6387f7;padding:17px 0;font-size:14px;color:#f0f3ff}
+    .preparation .check{font-size:14px;color:#c8d5ff}
+    .demo-notice{font-size:12px;line-height:1.65;color:#dae3ff;margin-top:21px}
+    .demo-notice strong{color:white}
+    .next-panel .text-link{color:#fff;border-color:#91a8f8;margin-top:20px}
+    .site-footer{padding:0 0 30px}
+    .footer-inner{border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:30px;padding-top:25px;font-size:12px;color:var(--muted)}
+    .footer-name{color:var(--ink);font-weight:700;font-size:15px;letter-spacing:-.03em}
+    .footer-inner a:hover{color:var(--blue)}
+    @media(min-width:1500px){.hero{padding-top:85px}.hero-grid{padding-bottom:65px}}
+    @media(max-width:1020px){
+      .container{width:calc(100% - 48px)}.site-nav{gap:18px}.hero-grid{gap:30px}.hero h1{font-size:clamp(48px,6.45vw,67px)}.hero-art{padding:27px 20px 24px;min-height:410px}.code-lines{padding:20px 13px;font-size:12px}.code-result{margin-left:25px;padding:15px;font-size:12px}.section{padding:78px 0}.benefits{padding-top:0}.about-layout{gap:45px;grid-template-columns:1fr 1.7fr}.section-top{gap:35px}.section-top .eyebrow{min-width:160px}.benefits-layout{gap:35px;grid-template-columns:1fr 2.6fr}.benefit-list{gap:20px}.direction-card{padding:23px 20px}.direction-card h3{font-size:25px}.direction-card>p{min-height:120px}.faq-layout{gap:50px}.next-panel{padding:40px;gap:40px}.next-panel h2{font-size:38px}
+    }
+    @media(max-width:760px){
+      html{scroll-padding-top:24px}.container{width:calc(100% - 40px)}.header-inner{min-height:0;display:block;padding:19px 0 16px}.logo{font-size:23px}.site-nav{margin-top:15px;gap:4px 20px;flex-wrap:wrap;font-size:13px}.site-nav a{padding:5px 0}.hero{padding-top:42px}.hero-grid{grid-template-columns:1fr;gap:36px;padding-bottom:36px}.hero h1{font-size:clamp(53px,11.3vw,78px);max-width:620px;margin:22px 0}.hero-description{font-size:17px;max-width:530px}.hero-art{min-height:0;max-width:510px;width:100%;padding:28px 28px 25px}.code-window{margin-top:23px;max-width:420px}.code-lines{font-size:14px;padding:22px}.code-result{margin-left:80px;max-width:340px;font-size:14px}.cursor-label{margin-top:18px}.hero-strip{padding:18px 0;gap:16px}.strip-item{padding:0;gap:9px;border:0;font-size:11px;line-height:1.5}.strip-number{font-size:10px}.section{padding:64px 0}.section-top{display:block;margin-bottom:28px}.section-top .eyebrow{padding:0;margin-bottom:21px}.section-top h2{font-size:43px}.about-layout{grid-template-columns:1fr;gap:25px}.about-tag{margin:0}.about-copy{font-size:20px}.benefits{padding-top:0}.benefits-layout{display:block;padding-top:28px}.benefits h2{max-width:none;font-size:29px;margin-bottom:30px}.benefit-list{gap:25px}.benefit-list h3{font-size:17px}.benefit-list p{font-size:13px}.directions-heading,.route-intro{display:block;margin-top:21px}.directions-heading h2,.route-intro h2{font-size:43px}.directions-heading p,.route-intro p{max-width:500px;margin-top:20px}.direction-grid{gap:14px;grid-template-columns:1fr}.direction-card{padding:25px;display:grid;grid-template-columns:1fr 1.4fr;gap:0 25px}.card-meta{grid-column:1/-1}.direction-symbol{margin:25px 0 17px;grid-column:1}.direction-card h3{grid-column:1;font-size:28px;margin-bottom:18px}.direction-card>p{grid-column:2;grid-row:2/4;align-self:center;min-height:0}.project-example{grid-column:1/-1;margin:6px 0 20px;padding-top:15px}.direction-card .text-link{grid-column:1/-1}.route-list{grid-template-columns:repeat(2,1fr);gap:30px 24px;border:0}.route-list li{border-top:1px solid var(--line);padding-top:24px;padding-right:0}.meeting-number{margin-bottom:22px}.route-list p,.route-list h3{max-width:none}.faq-layout{grid-template-columns:1fr;gap:30px}.faq-intro h2{font-size:43px;margin:21px 0 15px}.faq-intro p{max-width:500px}.next-panel{grid-template-columns:1fr;padding:32px;gap:30px}.next-panel h2{font-size:41px;max-width:500px}.next-panel .next-description{max-width:500px}.next-step{padding-bottom:50px}.footer-inner{align-items:flex-start;flex-wrap:wrap;gap:13px 25px}.footer-inner>p{flex-basis:100%;order:3}
+    }
+    @media(max-width:420px){
+      .container{width:calc(100% - 32px)}.hero h1{font-size:53px}.eyebrow{font-size:10px}.hero-actions{gap:12px}.button{gap:18px;padding:13px 17px}.text-link{font-size:13px}.hero-art{padding:23px 18px}.art-caption{font-size:9px}.code-lines{font-size:12px;padding:19px 11px}.code-lines .number{width:23px}.code-result{margin-left:34px;font-size:12px;gap:10px;padding:14px}.hero-strip{grid-template-columns:1fr;gap:12px}.strip-item{font-size:12px;gap:12px}.benefit-list{grid-template-columns:1fr;gap:28px}.benefit-list li{display:grid;grid-template-columns:38px 1fr;column-gap:18px}.benefit-icon{grid-row:1/3;margin-bottom:0}.benefit-list h3{font-size:19px;margin-bottom:8px}.benefit-list p{font-size:14px}.direction-card{display:flex;padding:25px}.direction-symbol{margin:28px 0 20px}.direction-card>p{margin-bottom:15px}.direction-card h3{margin-bottom:14px}.project-example{width:100%;margin-top:8px}.route-list{grid-template-columns:1fr;gap:28px}.meeting-number{margin-bottom:14px}.route-list h3{font-size:24px}.route-list p{max-width:330px}.meeting-result{margin-top:14px}.next-panel{padding:29px 24px}.next-panel h2{font-size:37px}.section-top h2,.directions-heading h2,.route-intro h2,.faq-intro h2{font-size:38px}
+    }
+    @media(max-width:760px){
+      .header-inner.menu-ready{display:flex;flex-wrap:wrap;gap:0 16px}
+      .menu-ready .menu-toggle{display:inline-flex;margin-left:auto}
+      .menu-ready .site-nav{flex-basis:100%;flex-direction:column;align-items:stretch;gap:0;padding-top:8px;border-top:1px solid var(--line)}
+      .menu-ready .site-nav a{display:flex;align-items:center;min-height:44px;padding:10px 4px}
+      .menu-ready .site-nav .nav-next{gap:7px;border-bottom:0}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">К содержанию</a>
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="logo" href="#top" aria-label="Код рядом — в начало страницы"><span class="logo-symbol" aria-hidden="true">&lt;/&gt;</span>код рядом</a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden><span class="menu-icon" aria-hidden="true"></span>Меню</button>
+      <nav class="site-nav" id="site-nav" aria-label="Главная навигация">
+        <a href="#about">О клубе</a>
+        <a href="#directions">Направления</a>
+        <a href="#route">Первые встречи</a>
+        <a href="#faq">Вопросы</a>
+        <a class="nav-next" href="#next-step">С чего начать <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Студенческий клуб · учебный проект</p>
+            <h1 id="hero-title">Первый код.<br>Свои люди.<br><span>Общий старт.</span></h1>
+            <p class="hero-description">Разбираемся в программировании, задаём любые вопросы и собираем первые проекты. С нуля и вместе.</p>
+            <div class="hero-actions">
+              <a class="button" href="#directions">Выбрать направление <span class="arrow" aria-hidden="true">↗</span></a>
+              <a class="text-link" href="#route">Как проходят встречи <span aria-hidden="true">→</span></a>
+            </div>
+            <p class="hero-note">Для студентов с любым стартом — опыт не обязателен.</p>
+          </div>
+          <div class="hero-art" role="img" aria-label="Иллюстрация редактора: приветствие команды на Python и результат «Начнём вместе?»">
+            <div class="art-grid" aria-hidden="true"></div>
+            <div class="art-caption" aria-hidden="true"><span>РАБОЧЕЕ МЕСТО НОВИЧКА</span><span>01 / HELLO</span></div>
+            <div class="code-window" aria-hidden="true">
+              <div class="window-top"><i></i><i></i><i></i><span>first_step.py</span></div>
+              <div class="code-lines">
+                <div><span class="number">1</span><span class="comment"># всё начинается с «привет»</span></div>
+                <div><span class="number">2</span>team = <span class="string">"Код рядом"</span></div>
+                <div><span class="number">3</span></div>
+                <div><span class="number">4</span><span class="keyword">def</span> first_step():</div>
+                <div><span class="number">5</span>&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"Начнём вместе?"</span></div>
+                <div><span class="number">6</span></div>
+                <div><span class="number">7</span><span class="keyword">print</span>(first_step())</div>
+              </div>
+            </div>
+            <div class="code-result" aria-hidden="true"><span class="result-check">✓</span><span>Начнём вместе?</span></div>
+            <div class="cursor-label" aria-hidden="true"><svg width="19" height="23" viewBox="0 0 19 23" fill="none"><path d="M2 2L17 12L9 13L6 21L2 2Z" fill="#1749ed" stroke="#e4eaff" stroke-width="2"/></svg>тут можно ошибаться</div>
+          </div>
+        </div>
+        <div class="hero-strip" aria-label="Основные принципы клуба">
+          <p class="strip-item"><span class="strip-number">01 /</span>Меньше длинных лекций</p>
+          <p class="strip-item"><span class="strip-number">02 /</span>Больше практики в парах</p>
+          <p class="strip-item"><span class="strip-number">03 /</span>Один небольшой шаг за раз</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="section-top">
+          <p class="eyebrow">01 — Знакомство</p>
+          <h2 id="about-title">Учиться проще,<br>когда есть с кем.</h2>
+        </div>
+        <div class="about-layout">
+          <div><span class="about-tag"><span aria-hidden="true">{ }</span> любопытство &gt; опыт</span></div>
+          <div class="about-copy">
+            <p>«Код рядом» — идея клуба для студентов, которым хочется перейти от «когда-нибудь попробую» к первой работающей программе.</p>
+            <p>Предлагаемый формат встречи: короткий разбор темы, задача в паре и обсуждение результата. Участники учатся объяснять решения и искать ошибки вместе. Здесь не нужно знать ответ заранее — достаточно быть готовым попробовать.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section benefits" aria-labelledby="benefits-title">
+      <div class="container benefits-layout">
+        <h2 id="benefits-title">Что даёт<br>совместная практика</h2>
+        <ul class="benefit-list">
+          <li><span class="benefit-icon" aria-hidden="true">?</span><h3>Вопросы вслух</h3><p>Формулируя вопрос, легче заметить, на каком шаге теряется понимание. А чужой вопрос может оказаться и твоим.</p></li>
+          <li><span class="benefit-icon" aria-hidden="true">↔</span><h3>Второй взгляд</h3><p>В паре можно сравнить два решения, проверить предположение и разобраться, почему программа ведёт себя иначе.</p></li>
+          <li><span class="benefit-icon" aria-hidden="true">↗</span><h3>Видимый результат</h3><p>Небольшой проект помогает связать отдельные темы и увидеть, что уже получается делать самостоятельно.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section directions" id="directions" aria-labelledby="directions-title">
+      <div class="container">
+        <p class="eyebrow">02 — Найди свой интерес</p>
+        <div class="directions-heading"><h2 id="directions-title">Три пути в код.</h2><p>Выбирай по тому, что хочется сделать. На старте можно попробовать разные задачи.</p></div>
+        <div class="direction-filter" id="direction-filter" role="group" aria-label="Показать направление" hidden>
+          <span class="filter-caption" aria-hidden="true">Показать:</span>
+          <button class="filter-button" type="button" data-filter="all" aria-pressed="true" aria-controls="direction-grid">Все</button>
+          <button class="filter-button" type="button" data-filter="python" aria-pressed="false" aria-controls="direction-grid">Python</button>
+          <button class="filter-button" type="button" data-filter="web" aria-pressed="false" aria-controls="direction-grid">Веб</button>
+          <button class="filter-button" type="button" data-filter="algorithms" aria-pressed="false" aria-controls="direction-grid">Алгоритмы</button>
+        </div>
+        <p class="filter-status" id="direction-status" role="status" aria-live="polite" aria-atomic="true" hidden>Показаны все направления: 3 из 3.</p>
+        <div class="direction-grid" id="direction-grid">
+          <article class="direction-card" data-direction="python">
+            <div class="card-meta"><span class="card-no">/ 01</span><span>Начни с простого</span></div>
+            <div class="direction-symbol" aria-hidden="true">print()</div>
+            <h3>Python</h3>
+            <p>Переменные, условия и циклы на понятных задачах. Учимся превращать последовательность действий в работающую программу.</p>
+            <div class="project-example"><span>Первый мини-проект</span>Консольный список дел: добавить задачу, показать список, отметить готовое.</div>
+            <a class="text-link" href="#route">Посмотреть маршрут <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="direction-card" data-direction="web">
+            <div class="card-meta"><span class="card-no">/ 02</span><span>Увидь результат</span></div>
+            <div class="direction-symbol" aria-hidden="true">&lt;/&gt;</div>
+            <h3>Веб-разработка</h3>
+            <p>HTML задаёт структуру, CSS — оформление, а JavaScript добавляет действия. Собираем страницу, удобную на телефоне и компьютере.</p>
+            <div class="project-example"><span>Первый мини-проект</span>Страница о любимом увлечении с карточками и раскрывающимися ответами.</div>
+            <a class="text-link" href="#route">Посмотреть маршрут <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="direction-card" data-direction="algorithms">
+            <div class="card-meta"><span class="card-no">/ 03</span><span>Разложи по шагам</span></div>
+            <div class="direction-symbol" aria-hidden="true">[1,2,3]</div>
+            <h3>Алгоритмы</h3>
+            <p>Разбираем задачу на части, сравниваем способы поиска и проверяем решения на примерах. Начинаем со схем и простого кода.</p>
+            <div class="project-example"><span>Первый мини-проект</span>Игра «Угадай число» со счётчиком попыток и обсуждением стратегии поиска.</div>
+            <a class="text-link" href="#route">Посмотреть маршрут <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+        <p class="directions-footnote">Это примеры учебных направлений и проектов, а не расписание действующих занятий.</p>
+      </div>
+    </section>
+
+    <section class="section" id="route" aria-labelledby="route-title">
+      <div class="container">
+        <p class="eyebrow">03 — От знакомства к проекту</p>
+        <div class="route-intro"><h2 id="route-title">Первые четыре встречи.</h2><p>Пример маршрута для любого направления. Темп можно менять, если теме нужно больше времени.</p></div>
+        <ol class="route-list">
+          <li><span class="meeting-number">ВСТРЕЧА / 01</span><h3>Осмотреться<br>и попробовать</h3><p>Знакомимся с инструментами, запускаем пример и меняем в нём одну деталь.</p><span class="meeting-result">Результат: первый запуск</span></li>
+          <li><span class="meeting-number">ВСТРЕЧА / 02</span><h3>Разобраться<br>в основах</h3><p>Берём одну тему и решаем короткую задачу в паре. Объясняем друг другу ход мысли.</p><span class="meeting-result">Результат: своё решение</span></li>
+          <li><span class="meeting-number">ВСТРЕЧА / 03</span><h3>Собрать<br>мини-проект</h3><p>Выбираем небольшую идею, делим работу на шаги и собираем первую версию.</p><span class="meeting-result">Результат: рабочий черновик</span></li>
+          <li><span class="meeting-number">ВСТРЕЧА / 04</span><h3>Показать<br>и улучшить</h3><p>Проверяем проект на разных примерах, обсуждаем трудности и намечаем следующую доработку.</p><span class="meeting-result">Результат: проект и план</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section faq-section" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-layout">
+        <div class="faq-intro"><p class="eyebrow">04 — Всё можно спросить</p><h2 id="faq-title">Перед стартом.</h2><p>Несколько ответов о предлагаемом формате. Нажми на вопрос, чтобы прочитать подробнее.</p></div>
+        <div class="faq-list">
+          <details><summary>Можно совсем без опыта?</summary><p>Да, этот учебный формат рассчитан в том числе на первый опыт. Начать можно с запуска готового примера, а затем постепенно разбирать, как он работает. Знание терминов заранее не требуется.</p></details>
+          <details><summary>Какое направление выбрать первым?</summary><p>Если хочется писать небольшие программы — попробуй Python. Если интересны страницы и визуальный результат — веб-разработку. Если нравится разбирать логические задачи — алгоритмы. Выбор на старте можно пересмотреть.</p></details>
+          <details><summary>Нужен мощный ноутбук?</summary><p>Для предложенных начальных проектов обычно достаточно обычного ноутбука с браузером и текстовым редактором. Конкретные инструменты стоит выбирать под направление и возможности устройства.</p></details>
+          <details><summary>Что делать, если я не успеваю?</summary><p>Уменьшить задачу до одного понятного шага и обсудить затруднение с напарником. В предлагаемом формате важнее понять решение, чем первым перейти к следующей теме.</p></details>
+          <details><summary>Где и когда проходят встречи?</summary><p>«Код рядом» — вымышленный клуб, созданный для учебного лендинга. Реальных встреч, записи и контактов на этой странице нет. Маршрут и проекты показывают, как мог бы быть устроен такой клуб.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="next-step" id="next-step" aria-labelledby="next-title">
+      <div class="container next-panel">
+        <div><p class="eyebrow">05 — Следующий маленький шаг</p><h2 id="next-title">Начни с интереса.<br>Остальное — по шагам.</h2><p class="next-description">Этот список поможет подготовиться к учебной встрече или устроить первую совместную практику с одногруппником.</p><a class="text-link" href="#directions">Вернуться к направлениям <span aria-hidden="true">↗</span></a></div>
+        <div>
+          <ul class="preparation">
+            <li><span class="check" aria-hidden="true">✓</span><span>Выбери одну задачу, которую хочется научиться решать.</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Подготовь ноутбук и место для заметок.</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Запиши вопрос — даже если он кажется очень простым.</span></li>
+          </ul>
+          <p class="demo-notice"><strong>О контактах.</strong> Это демонстрационный учебный проект. Клуб вымышленный, поэтому адресов, формы записи и реальных контактов здесь нет.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner"><a class="footer-name" href="#top">код рядом</a><p>Учебный лендинг · вымышленный студенческий клуб</p><a href="#top">К началу <span aria-hidden="true">↑</span></a></div>
+  </footer>
+  <script>
+    (() => {
+      "use strict";
+
+      const menuButton = document.getElementById("menu-toggle");
+      const navigation = document.getElementById("site-nav");
+      const mobileScreen = window.matchMedia("(max-width: 760px)");
+
+      function setMenu(open) {
+        menuButton.setAttribute("aria-expanded", String(open));
+        navigation.hidden = mobileScreen.matches && !open;
+      }
+
+      function syncMenuLayout() {
+        const focusInNavigation = navigation.contains(document.activeElement);
+        const focusOnButton = document.activeElement === menuButton;
+        menuButton.hidden = !mobileScreen.matches;
+        setMenu(false);
+        if (mobileScreen.matches && focusInNavigation) {
+          menuButton.focus();
+        } else if (!mobileScreen.matches && focusOnButton) {
+          navigation.querySelector("a").focus();
+        }
+      }
+
+      menuButton.addEventListener("click", () => {
+        setMenu(menuButton.getAttribute("aria-expanded") !== "true");
+      });
+
+      navigation.addEventListener("click", (event) => {
+        const link = event.target.closest('a[href^="#"]');
+        if (!mobileScreen.matches || !link) return;
+        setMenu(false);
+        const section = document.getElementById(link.getAttribute("href").slice(1));
+        if (section) {
+          const temporaryTabIndex = !section.hasAttribute("tabindex");
+          if (temporaryTabIndex) section.setAttribute("tabindex", "-1");
+          section.focus({ preventScroll: true });
+          if (temporaryTabIndex) {
+            section.addEventListener("blur", () => section.removeAttribute("tabindex"), { once: true });
+          }
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && mobileScreen.matches && menuButton.getAttribute("aria-expanded") === "true") {
+          event.preventDefault();
+          setMenu(false);
+          menuButton.focus();
+        }
+      });
+
+      mobileScreen.addEventListener("change", syncMenuLayout);
+      document.querySelector(".header-inner").classList.add("menu-ready");
+      syncMenuLayout();
+
+      const filterGroup = document.getElementById("direction-filter");
+      const filterButtons = Array.from(filterGroup.querySelectorAll("button[data-filter]"));
+      const cards = Array.from(document.querySelectorAll(".direction-card[data-direction]"));
+      const filterStatus = document.getElementById("direction-status");
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const selected = button.dataset.filter;
+          filterButtons.forEach((item) => {
+            item.setAttribute("aria-pressed", String(item === button));
+          });
+          cards.forEach((card) => {
+            card.hidden = selected !== "all" && card.dataset.direction !== selected;
+          });
+          const visibleCards = cards.filter((card) => !card.hidden);
+          filterStatus.textContent = selected === "all"
+            ? `Показаны все направления: ${visibleCards.length} из ${cards.length}.`
+            : `Показано направление «${visibleCards[0].querySelector("h3").textContent}»: ${visibleCards.length} из ${cards.length}.`;
+        });
+      });
+      filterGroup.hidden = false;
+      filterStatus.hidden = false;
+    })();
+  </script>
+</body>
+</html>
